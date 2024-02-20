@@ -1,1 +1,47 @@
-[]
+[
+  {
+    "id": 1,
+    "code": "1111",
+    "title": "iPhone X | 64gb",
+    "description": "Teléfono inteligente Apple con almacenamiento de 64 GB, color blanco",
+    "price": "250",
+    "thumbnail": "https://todoapplecaba.com.ar/wp-content/uploads/2021/05/apple-iphone-x-64gb-silver-used-20191122085356800-_w500_1-8532858c58bff3411615996662135414-640-0.jpg",
+    "stock": "3"
+  },
+  {
+    "id": 2,
+    "code": "1112",
+    "title": "iPhone 11 | 64gb",
+    "description": "Teléfono inteligente Apple con almacenamiento de 64 GB, color negro",
+    "price": "400",
+    "thumbnail": "https://todoapplecaba.com.ar/wp-content/uploads/2021/05/apple-iphone-x-64gb-silver-used-20191122085356800-_w500_1-8532858c58bff3411615996662135414-640-0.jpg",
+    "stock": "3"
+  },
+  {
+    "id": 3,
+    "code": "1113",
+    "title": "iPhone 11 | 64gb",
+    "description": "Teléfono inteligente Apple con almacenamiento de 64 GB, color negro",
+    "price": "450",
+    "thumbnail": "https://todoapplecaba.com.ar/wp-content/uploads/2021/05/apple-iphone-x-64gb-silver-used-20191122085356800-_w500_1-8532858c58bff3411615996662135414-640-0.jpg",
+    "stock": "3"
+  },
+  {
+    "id": 4,
+    "code": "1114",
+    "title": "iPhone 12 | 64gb",
+    "description": "Teléfono inteligente Apple con almacenamiento de 64 GB, color negro",
+    "price": "450",
+    "thumbnail": "https://todoapplecaba.com.ar/wp-content/uploads/2021/05/apple-iphone-x-64gb-silver-used-20191122085356800-_w500_1-8532858c58bff3411615996662135414-640-0.jpg",
+    "stock": "3"
+  },
+  {
+    "id": 5,
+    "code": "1115",
+    "title": "iPhone 13 | 64gb",
+    "description": "Teléfono inteligente Apple con almacenamiento de 64 GB, color negro",
+    "price": "450",
+    "thumbnail": "https://todoapplecaba.com.ar/wp-content/uploads/2021/05/apple-iphone-x-64gb-silver-used-20191122085356800-_w500_1-8532858c58bff3411615996662135414-640-0.jpg",
+    "stock": "3"
+  }
+]
