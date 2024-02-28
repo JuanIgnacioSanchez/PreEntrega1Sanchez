@@ -12,7 +12,7 @@ class Product {
   }
 }
 
-class ProductManager {
+export default class ProductManager {
   constructor(filePath) {
     this.path = filePath;
     this.initializeFile();
@@ -115,10 +115,9 @@ class ProductManager {
 }
 
 // Ejemplo de uso
-const PM = new ProductManager("./products.json");
+const PM = new ProductManager("./data/products.json");
 
 let arrayProducts = PM.getProducts();
-module.exports = { arrayProducts };
 
 PM.addProduct({
   code: "1111",
@@ -175,7 +174,6 @@ PM.addProduct({
   stock: "3",
 });
 
-/*
 console.log("\n\n\n", PM.getProducts());
 
 console.log("\n\n\n Obteniendo producto con id 1:  ", PM.getProductById(1));
@@ -188,4 +186,5 @@ PM.deleteProduct(1);
 PM.deleteProduct(2);
 PM.deleteProduct(3);
 
-console.log("\n\n\n", PM.getProducts()); */
+console.log("\n\n\n", PM.getProducts());
+console.log(arrayProducts);
