@@ -1,17 +1,72 @@
 import express from "express";
+import { CartManager } from "../cartManager.js";
 
 const cartRouter = express.Router();
+const CM = new CartManager("./data/carts.json");
 
+// Ruta principal para ver carritso
+cartRouter.get("/", (req, res) => {
+  const allCarts = CM.getAllCarts();
+  res.json(allCarts);
+});
+
+// Ruta para crear un nuevo carrito
 cartRouter.post("/", (req, res) => {
-  // Implementa la lógica para crear un nuevo carrito
+  const newCart = CM.createCart();
+  res.status(201).json({ message: "Nuevo carrito creado", cart: newCart });
 });
 
+// Ruta para obtener productos de un carrito por ID
 cartRouter.get("/:cid", (req, res) => {
-  // Implementa la lógica para obtener productos de un carrito por ID
+  const { cid } = req.params;
+  const cart = CM.getCartById(cid);
+
+  if (!cart) {
+    return res
+      .status(404)
+      .json({ error: `No existe un carrito con el id ${cid}` });
+  }
+
+  res.json(cart);
 });
 
+// Ruta para eliminar un carrito por id
+cartRouter.delete("/:cid", (req, res) => {
+  const { cid } = req.params;
+  const success = CM.deleteCart(cid);
+
+  if (!success) {
+    return res
+      .status(404)
+      .json({ error: `No existe un carrito con el id ${cid}` });
+  }
+
+  res.json({ message: `Carrito con id ${cid} eliminado correctamente` });
+});
+
+// Ruta para agregar un producto a un carrito
 cartRouter.post("/:cid/product/:pid", (req, res) => {
-  // Implementa la lógica para agregar un producto a un carrito por ID
+  const { cid, pid } = req.params;
+  const quantity = req.body.quantity || 1;
+  const result = CM.addProductToCart(cid, pid, quantity);
+
+  if (!result.success) {
+    return res.status(404).json({ error: result.message });
+  }
+
+  res.json({ message: result.message, cart: result.cart });
 });
 
-export default cartRouter;
+// Ruta para eliminar un producto de un carrito
+cartRouter.delete("/:cid/product/:pid", (req, res) => {
+  const { cid, pid } = req.params;
+  const result = CM.removeProductFromCart(cid, pid);
+
+  if (!result.success) {
+    return res.status(404).json({ error: result.message });
+  }
+
+  res.json({ message: result.message, cart: result.cart });
+});
+
+export { cartRouter };

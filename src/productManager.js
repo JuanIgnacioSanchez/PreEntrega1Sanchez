@@ -1,4 +1,4 @@
-const fs = require("fs");
+import fs from "fs";
 
 class Product {
   constructor(id, code, title, description, price, thumbnail, stock) {
@@ -12,7 +12,7 @@ class Product {
   }
 }
 
-export default class ProductManager {
+class ProductManager {
   constructor(filePath) {
     this.path = filePath;
     this.initializeFile();
@@ -21,8 +21,21 @@ export default class ProductManager {
   }
 
   initializeFile() {
-    if (!fs.existsSync(this.path)) {
-      fs.writeFileSync(this.path, "[]", "utf8");
+    const directory = "./data/";
+    const filePath = `${directory}products.json`;
+
+    try {
+      // Verificar si el directorio existe, si no, créalo
+      if (!fs.existsSync(directory)) {
+        fs.mkdirSync(directory);
+      }
+
+      // Verificar si el archivo existe, si no, créalo
+      if (!fs.existsSync(filePath)) {
+        fs.writeFileSync(filePath, "[]", "utf8");
+      }
+    } catch (error) {
+      console.error("Error al inicializar el archivo:", error);
     }
   }
 
@@ -119,7 +132,7 @@ const PM = new ProductManager("./data/products.json");
 
 let arrayProducts = PM.getProducts();
 
-PM.addProduct({
+/* PM.addProduct({
   code: "1111",
   title: "iPhone X | 64gb",
   description:
@@ -186,5 +199,6 @@ PM.deleteProduct(1);
 PM.deleteProduct(2);
 PM.deleteProduct(3);
 
-console.log("\n\n\n", PM.getProducts());
-console.log(arrayProducts);
+console.log("\n\n\n", PM.getProducts()); */
+
+export { ProductManager };
