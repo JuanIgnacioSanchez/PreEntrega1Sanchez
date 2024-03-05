@@ -1,14 +1,5 @@
 [
   {
-    "id": 4,
-    "code": "1114",
-    "title": "iPhone 12 | 128gb",
-    "description": "Teléfono inteligente Apple con almacenamiento de 128 GB, color midnight",
-    "price": "450",
-    "thumbnail": "https://todoapplecaba.com.ar/wp-content/uploads/2021/05/apple-iphone-x-64gb-silver-used-20191122085356800-_w500_1-8532858c58bff3411615996662135414-640-0.jpg",
-    "stock": "3"
-  },
-  {
     "id": 5,
     "code": "1115",
     "title": "iPhone 13 | 256gb",

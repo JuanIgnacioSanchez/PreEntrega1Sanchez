@@ -20,7 +20,7 @@ productRouter.get("/", (req, res) => {
 // Obtener un producto por ID
 productRouter.get("/:pid", (req, res) => {
   const { pid } = req.params;
-  const product = PM.getProductById(Number(pid));
+  const product = PM.getProductById(pid);
 
   if (!product) {
     return res
@@ -63,7 +63,7 @@ productRouter.post("/", (req, res) => {
     stock,
     category,
     thumbnails,
-    status: true, // Status es true por defecto
+    status: true,
   };
 
   // Agregar el producto al manager

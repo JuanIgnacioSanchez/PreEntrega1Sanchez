@@ -71,16 +71,16 @@ class CartManager {
   }
 
   deleteCart(cartId) {
-    const index = this.carts.findIndex((cart) => cart.id === cartId);
+    const updatedCarts = this.carts.filter((cart) => cart.id !== cartId);
 
-    if (index === -1) {
+    if (updatedCarts.length === this.carts.length) {
       return {
         success: false,
         message: `No existe un carrito con el id ${cartId}`,
       };
     }
 
-    this.carts.splice(index, 1);
+    this.carts = updatedCarts;
     this.saveCarts();
 
     return {
@@ -99,22 +99,21 @@ class CartManager {
       };
     }
 
-    const product = cart.products.find((p) => p.id === productId);
+    const productIndex = cart.products.findIndex((p) => p.id === productId);
 
-    if (!product) {
+    if (productIndex === -1) {
       return {
         success: false,
         message: `No existe un producto con el id ${productId} en el carrito`,
       };
     }
 
+    const product = cart.products[productIndex];
+
     if (product.quantity > 1) {
-      // Restar 1 a la cantidad si es mayor que 1
       product.quantity -= 1;
     } else {
-      // Eliminar completamente el producto si la cantidad es 1
-      const index = cart.products.indexOf(product);
-      cart.products.splice(index, 1);
+      cart.products.splice(productIndex, 1);
     }
 
     this.saveCarts();

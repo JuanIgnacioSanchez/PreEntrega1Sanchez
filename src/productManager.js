@@ -15,9 +15,11 @@ class Product {
 class ProductManager {
   constructor(filePath) {
     this.path = filePath;
-    this.initializeFile();
     this.products = this.loadProducts();
-    this.currentId = this.calculateCurrentId();
+    this.currentId =
+      this.products.length > 0
+        ? Math.max(...this.products.map((product) => product.id)) + 1
+        : 1;
   }
 
   initializeFile() {
@@ -76,7 +78,7 @@ class ProductManager {
     }
 
     const newProduct = new Product(
-      this.currentId++,
+      this.currentId,
       code,
       title,
       description,
@@ -86,6 +88,7 @@ class ProductManager {
     );
     this.products.push(newProduct);
     this.saveProducts();
+    this.currentId++;
   }
 
   getProducts() {
