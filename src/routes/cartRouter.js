@@ -1,8 +1,9 @@
 import express from "express";
-import { CartManager } from "../cartManager.js";
+import { CartManager } from "../classes/cartManager.js";
+import { cartsPath } from "../utils.js";
 
 const cartRouter = express.Router();
-const CM = new CartManager("./data/carts.json");
+const CM = new CartManager(cartsPath);
 
 // Ruta principal para ver carritso
 cartRouter.get("/", (req, res) => {
@@ -16,7 +17,19 @@ cartRouter.post("/", (req, res) => {
   res.status(201).json({ message: "Nuevo carrito creado", cart: newCart });
 });
 
-// Ruta para obtener productos de un carrito por ID
+// Ruta para obtener un producto de un carrito por ID
+cartRouter.get("/:cid/product/:pid", (req, res) => {
+  const { cid, pid } = req.params;
+  const result = CM.getProductById(cid, pid);
+
+  if (!result.success) {
+    return res.status(404).json({ error: result.message });
+  }
+
+  res.json({ message: result.message, product: result.product });
+});
+
+// Ruta para obtener carrito por ID
 cartRouter.get("/:cid", (req, res) => {
   const { cid } = req.params;
   const cart = CM.getCartById(cid);

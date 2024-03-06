@@ -1,4 +1,5 @@
 import fs from "fs";
+import { productsPath } from "../utils.js";
 
 class Product {
   constructor(id, code, title, description, price, thumbnail, stock) {
@@ -46,6 +47,7 @@ class ProductManager {
       const data = fs.readFileSync(this.path, "utf8");
       return JSON.parse(data);
     } catch (error) {
+      console.error("Error al cargar productos:", error);
       return [];
     }
   }
@@ -96,7 +98,8 @@ class ProductManager {
   }
 
   getProductById(id) {
-    const product = this.products.find((product) => product.id === id);
+    const productId = Number(id);
+    const product = this.products.find((product) => product.id === productId);
 
     if (!product) {
       console.log(
@@ -118,25 +121,37 @@ class ProductManager {
     return false;
   }
 
+  reorganizeProductIds() {
+    this.products.forEach((product, index) => {
+      const newId = index + 1;
+      product.id = newId;
+    });
+  }
+
   deleteProduct(id) {
     const index = this.products.findIndex((product) => product.id === id);
     if (index !== -1) {
       this.products.splice(index, 1);
+      this.reorganizeProductIds();
       this.saveProducts();
       console.log("El producto con el id " + id + " ha sido eliminado.");
       return true;
     }
+    console.log("No existe un producto con el id " + id + ".");
     return false;
   }
 }
 
 // Ejemplo de uso
-const PM = new ProductManager("./data/products.json");
+const PM = new ProductManager(productsPath);
 
-let arrayProducts = PM.getProducts();
+export let arrayProducts = PM.getProducts();
 
-/* PM.addProduct({
-  code: "1111",
+export { ProductManager };
+
+/*
+PM.addProduct({
+  code: "1118",
   title: "iPhone X | 64gb",
   description:
     "Teléfono inteligente Apple con almacenamiento de 64 GB, color blanco",
@@ -203,5 +218,3 @@ PM.deleteProduct(2);
 PM.deleteProduct(3);
 
 console.log("\n\n\n", PM.getProducts()); */
-
-export { ProductManager };

@@ -1,9 +1,10 @@
 import express from "express";
 import { v4 as uuidv4 } from "uuid";
-import { ProductManager } from "../productManager.js";
+import { ProductManager } from "../classes/productManager.js";
+import { productsPath } from "../utils.js";
 
 const productRouter = express.Router();
-const PM = new ProductManager("./data/products.json");
+const PM = new ProductManager(productsPath);
 
 // Obtener todos los productos
 productRouter.get("/", (req, res) => {
@@ -17,7 +18,7 @@ productRouter.get("/", (req, res) => {
   res.status(200).json({ result });
 });
 
-// Obtener un producto por ID
+// Ruta para obtener un producto por ID
 productRouter.get("/:pid", (req, res) => {
   const { pid } = req.params;
   const product = PM.getProductById(pid);

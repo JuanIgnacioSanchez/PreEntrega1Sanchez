@@ -1,9 +1,10 @@
 import { fileURLToPath } from "url";
 import { dirname } from "path";
+import { join } from "path";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-// utils.js
+
 let currentId = 0;
 
 export function generateUniqueId() {
@@ -12,3 +13,6 @@ export function generateUniqueId() {
 }
 
 export default __dirname;
+
+export const productsPath = join(__dirname, "data", "products.json");
+export const cartsPath = join(__dirname, "data", "carts.json");
