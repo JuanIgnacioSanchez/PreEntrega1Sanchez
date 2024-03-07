@@ -3,8 +3,11 @@
 <h3>Lista de productos</h3>
 <ul>
   {{#each products}}
-    <li>{{title}} - Precio: ${{price}}</li>
+    <li>{{title}} - Precio: ${{price}} <button>Eliminar producto</button></li>
   {{/each}}
 </ul>
 
 <a href="/">Home page</a>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/realTimeProducts.js"></script>

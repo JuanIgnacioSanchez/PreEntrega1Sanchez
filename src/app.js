@@ -35,18 +35,21 @@ app.get("/", (req, res) => {
   res.status(200).render("home");
 });
 
-// Usar el router de productos en /api/products
-app.use("/api/products", productRouter);
+// Middleware de productos
+app.use(
+  "/api/products",
+  (req, res, next) => {
+    req.io = io;
+    next();
+  },
+  productRouter
+);
 
 // Incorporar el router de carritos en /api/carts
 app.use("/api/carts", cartRouter);
 
-// Iniciar el servidor
 const server = app.listen(PORT, () => {
   console.log(`Server escuchando en puerto ${PORT}`);
 });
 
 io = new Server(server);
-io.on("connection", (socket) => {
-  console.log("Se ha conectado un cliente con id ", socket.id);
-});

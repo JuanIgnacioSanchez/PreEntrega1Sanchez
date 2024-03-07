@@ -65,22 +65,25 @@ class ProductManager {
 
   addProduct(productData) {
     const { code, title, description, price, thumbnail, stock } = productData;
+    // Verificamos que todos los campos necesarios estén presentes
     if (!code || !title || !description || !price || !thumbnail || !stock) {
       console.log(
         "Todos los campos son obligatorios. Por favor, complete todos."
       );
-      return;
+      return null; // Fallo debido a campos faltantes
     }
 
+    // Verificamos que no exista un producto con el mismo código
     if (this.products.some((item) => item.code === code)) {
       console.log(
         `El código ${code} ya existe. Por favor, ingrese uno diferente.`
       );
-      return;
+      return null; // Fallo debido a código duplicado
     }
 
+    // Si las validaciones pasan, procedemos a agregar el producto
     const newProduct = new Product(
-      this.currentId,
+      this.currentId, // No necesitas incrementar currentId aquí
       code,
       title,
       description,
@@ -88,9 +91,11 @@ class ProductManager {
       thumbnail,
       stock
     );
+
     this.products.push(newProduct);
     this.saveProducts();
     this.currentId++;
+    return newProduct;
   }
 
   getProducts() {
@@ -193,6 +198,16 @@ PM.addProduct({
     "https://todoapplecaba.com.ar/wp-content/uploads/2021/05/apple-iphone-x-64gb-silver-used-20191122085356800-_w500_1-8532858c58bff3411615996662135414-640-0.jpg",
   stock: "3",
 });
+PM.addProduct({
+  code: "1111",
+  title: "iPhone 12 | 256gb",
+  description:
+    "Teléfono inteligente Apple con almacenamiento de 256 GB, color negro",
+  price: "550",
+  thumbnail:
+    "https://todoapplecaba.com.ar/wp-content/uploads/2021/05/apple-iphone-x-64gb-silver-used-20191122085356800-_w500_1-8532858c58bff3411615996662135414-640-0.jpg",
+  stock: "2",
+});
 
 PM.addProduct({
   code: "1115",
@@ -205,6 +220,50 @@ PM.addProduct({
   stock: "3",
 });
 
+PM.addProduct({
+  code: "1113",
+  title: "iPhone X | 128gb",
+  description:
+    "Teléfono inteligente Apple con almacenamiento de 128 GB, color rosado",
+  price: "250",
+  thumbnail:
+    "https://todoapplecaba.com.ar/wp-content/uploads/2021/05/apple-iphone-x-64gb-silver-used-20191122085356800-_w500_1-8532858c58bff3411615996662135414-640-0.jpg",
+  stock: "4",
+});
+
+PM.addProduct({
+  code: "1114",
+  title: "iPhone 14 | 512gb",
+  description:
+    "Teléfono inteligente Apple con almacenamiento de 512 GB, color midnight",
+  price: "850",
+  thumbnail:
+    "https://todoapplecaba.com.ar/wp-content/uploads/2021/05/apple-iphone-x-64gb-silver-used-20191122085356800-_w500_1-8532858c58bff3411615996662135414-640-0.jpg",
+  stock: "1",
+});
+
+PM.addProduct({
+  code: "1121",
+  title: "iPhone X | 128gb",
+  description:
+    "Teléfono inteligente Apple con almacenamiento de 128 GB, color rosado",
+  price: "250",
+  thumbnail:
+    "https://todoapplecaba.com.ar/wp-content/uploads/2021/05/apple-iphone-x-64gb-silver-used-20191122085356800-_w500_1-8532858c58bff3411615996662135414-640-0.jpg",
+  stock: "4",
+});
+
+PM.addProduct({
+  code: "1122",
+  title: "iPhone X | 128gb",
+  description:
+    "Teléfono inteligente Apple con almacenamiento de 128 GB, color rosado",
+  price: "250",
+  thumbnail:
+    "https://todoapplecaba.com.ar/wp-content/uploads/2021/05/apple-iphone-x-64gb-silver-used-20191122085356800-_w500_1-8532858c58bff3411615996662135414-640-0.jpg",
+  stock: "4",
+});
+
 console.log("\n\n\n", PM.getProducts());
 
 console.log("\n\n\n Obteniendo producto con id 1:  ", PM.getProductById(1));
@@ -215,6 +274,6 @@ console.log("\n\n\n", PM.getProducts());
 
 PM.deleteProduct(1);
 PM.deleteProduct(2);
-PM.deleteProduct(3);
+PM.deleteProduct(6);
 
 console.log("\n\n\n", PM.getProducts()); */
