@@ -13,7 +13,7 @@ router.get("/", (req, res) => {
 });
 
 router.get("/realtimeproducts", (req, res) => {
-  res.status(200).render("realtimeproducts", {
+  res.status(200).render("realTimeProducts", {
     products,
   });
 });
